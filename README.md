@@ -1,39 +1,31 @@
-## adminer
+# Ansible Role: Adminer
 
-[![Build Status](https://travis-ci.org/Oefenweb/ansible-adminer.svg?branch=master)](https://travis-ci.org/Oefenweb/ansible-adminer) [![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-adminer-blue.svg)](https://galaxy.ansible.com/list#/roles/1961)
+[![Build Status](https://travis-ci.org/geerlingguy/ansible-role-adminer.svg?branch=master)](https://travis-ci.org/geerlingguy/ansible-role-adminer)
 
-Set up [adminer](http://www.adminer.org/) (Database management in a single PHP file).
+An Ansible Role that installs [Adminer](http://www.adminer.org/) on almost any computer.
 
-#### Requirements
+## Requirements
 
-* `apache2`
-* `php5`
+You need to have PHP and MySQL for Adminer to do anything useful.
 
-#### Variables
+## Role Variables
 
-* `adminer_install_dirs` [default: `[]`]: Directories to install adminer to (e.g. `/var/www`)
+TODO
 
 ## Dependencies
 
-None
+None.
 
-#### Example
+## Example Playbook
 
-```yaml
----
-- hosts: all
-  roles:
-  - adminer
-```
+    - hosts: servers
+      roles:
+        - { role: geerlingguy.adminer }
 
-#### License
+## License
 
-MIT
+MIT / BSD
 
-#### Author Information
+## Author Information
 
-Mischa ter Smitten
-
-#### Feedback, bug-reports, requests, ...
-
-Are [welcome](https://github.com/Oefenweb/ansible-adminer/issues)!
+This role was created in 2015 by [Jeff Geerling](http://jeffgeerling.com/), author of [Ansible for DevOps](http://ansiblefordevops.com/). It is originally a fork of [Oefenweb/ansible-adminer](https://github.com/Oefenweb/ansible-adminer).

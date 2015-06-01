@@ -1,10 +1,11 @@
 ---
-# meta file for adminer
+dependencies: []
+
 galaxy_info:
-  author: Mischa ter Smitten
-  company: Oefenweb.nl B.V.
-  description: Set up adminer (Database management in a single PHP file)
-  license: MIT
+  author: geerlingguy
+  description: Installs Adminer for Database management.
+  company: "Midwestern Mac, LLC"
+  license: "license (BSD, MIT)"
   min_ansible_version: 1.4
   platforms:
   - name: EL
@@ -38,6 +39,6 @@ galaxy_info:
     versions:
     - all
   categories:
-  - system
-  - database
-dependencies: []
+    - system
+    - database
+    - development

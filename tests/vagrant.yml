@@ -1,7 +1,0 @@
----
-# test file for adminer
-- hosts: all
-  remote_user: vagrant
-  sudo: true
-  roles:
-    - adminer

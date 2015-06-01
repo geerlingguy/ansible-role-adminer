@@ -1,4 +1,6 @@
 ---
+# TODO - Cleanup, make more flexible.
+
 # tasks file for adminer
 - name: create (download) directory
   file:

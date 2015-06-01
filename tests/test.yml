@@ -1,6 +1,5 @@
 ---
-# test file for adminer
 - hosts: localhost
   remote_user: root
   roles:
-    - ansible-adminer
+    - ansible-role-adminer
