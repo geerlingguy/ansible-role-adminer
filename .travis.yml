@@ -3,7 +3,8 @@ language: python
 python: "2.7"
 
 env:
-  - SITE=test.yml
+  - SITE=test-no-webserver.yml
+  - SITE=test-apache.yml
 
 before_install:
   - sudo apt-get update -qq
@@ -15,6 +16,9 @@ install:
 
   # Add ansible.cfg to pick up roles path.
   - "{ echo '[defaults]'; echo 'roles_path = ../'; } >> ansible.cfg"
+
+  # Install required dependencies.
+  - ansible-galaxy install geerlingguy.apache
 
 script:
   # Check the role/playbook's syntax.
