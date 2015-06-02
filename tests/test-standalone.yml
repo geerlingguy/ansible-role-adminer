@@ -1,0 +1,10 @@
+---
+- hosts: localhost
+  remote_user: root
+
+  vars:
+    adminer_install_dir: /opt/adminer
+    adminer_add_apache_config: false
+
+  roles:
+    - ansible-role-adminer
