@@ -19,15 +19,18 @@
     state: link
   with_items: adminer_symlink_dirs
 
-- command: ls -lah /etc/apache2
-  register: apad
-- debug: var=apad
-
 # Add Apache configuration (if configured).
+- name: Set the proper Apache configuration directory (Debian).
+  set_fact:
+    apache_extra_conf_dir: "{{ 'conf-enabled' if ansible_distribution_version.split('.')[0]|int > 12 else 'conf.d' }}"
+  when: adminer_add_apache_config and ansible_os_family == 'Debian'
+
+- debug: var=apache_extra_conf_dir
+
 - name: Add Apache configuration file for Adminer (Debian).
   template:
     src: adminer.conf.j2
-    dest: "{{ apache_conf_path }}/conf-enabled/adminer.conf"
+    dest: "{{ apache_conf_path }}/{{ apache_extra_conf_dir }}/adminer.conf"
   when: adminer_add_apache_config and ansible_os_family == 'Debian'
   notify: restart apache
 

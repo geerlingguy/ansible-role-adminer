@@ -20,9 +20,9 @@ The directory in which Adminer will be downloaded/installed.
 
 Directories inside which you would like `adminer.php` symlinked. Can be useful if you just want to toss the script into a docroot and access it at `sitename/adminer.php`.
 
-    adminer_add_apache_config: true
+    adminer_add_apache_config: false
 
-By default, Adminer will add a config file for Adminer so you can access it at `hostname/adminer` on any configured virtualhost, using an Apache `Alias` directive. The role will also restart Apache so this configuration takes effect immediately.
+Set this to `true` to tell Adminer to add a config file to Apache so you can access it at `hostname/adminer` on any configured virtualhost, using an Apache `Alias` directive. The role will also restart Apache so this configuration takes effect immediately.
 
 ## Dependencies
 
