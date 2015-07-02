@@ -22,7 +22,7 @@
 # Add Apache configuration (if configured).
 - name: Set the proper Apache configuration directory (Debian).
   set_fact:
-    apache_extra_conf_dir: "{{ 'conf-enabled' if ansible_distribution_version.split('.')[0]|int > 12 else 'conf.d' }}"
+    apache_extra_conf_dir: "{{ 'conf-enabled' if apache_vhosts_version == '2.4' else 'conf.d' }}"
   when: adminer_add_apache_config and ansible_os_family == 'Debian'
 
 - name: Add Apache configuration file for Adminer (Debian).
