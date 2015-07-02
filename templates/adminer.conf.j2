@@ -3,7 +3,7 @@ Alias /adminer "{{ adminer_install_dir }}/adminer.php"
 {% if apache_vhosts_version == "2.2" %}
     Order allow,deny
     Allow from all
-{% else %} 
+{% else %}
     Require all granted
 {% endif %}
 </Directory>
