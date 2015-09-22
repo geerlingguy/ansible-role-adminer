@@ -9,7 +9,7 @@
 - name: Download Adminer to configured directory.
   get_url:
     url: http://www.adminer.org/latest.php
-    dest: "{{ adminer_install_dir }}/adminer.php"
+    dest: "{{ adminer_install_dir }}/{{ adminer_install_filename }}"
     mode: 0644
 
 - name: Symlink Adminer into configured directories.

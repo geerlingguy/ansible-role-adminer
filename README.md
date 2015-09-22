@@ -16,6 +16,10 @@ Available variables are listed below, along with default values (see `defaults/m
 
 The directory in which Adminer will be downloaded/installed.
 
+    adminer_install_filename: adminer.php
+
+The filename for the downloaded Adminer application. If you're managing virtualhosts or server directives manually, it might be simpler to set the document root to your configured `adminer_install_dir`, and the filename to `index.php`, so you don't have to enter `/adminer.php` in the URL to access Adminer.
+
     adminer_symlink_dirs: []
 
 Directories inside which you would like `adminer.php` symlinked. Can be useful if you just want to toss the script into a docroot and access it at `sitename/adminer.php`.
