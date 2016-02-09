@@ -5,6 +5,8 @@
   vars:
     adminer_install_dir: /opt/adminer
     adminer_add_apache_config: false
+    apache_mods_enabled:
+      - rewrite.load
 
   roles:
     - ansible-role-adminer
