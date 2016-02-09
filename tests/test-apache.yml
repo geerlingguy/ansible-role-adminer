@@ -4,8 +4,6 @@
 
   vars:
     adminer_add_apache_config: true
-    apache_mods_enabled:
-      - rewrite.load
 
   roles:
     - geerlingguy.apache
