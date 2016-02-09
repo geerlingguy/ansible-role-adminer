@@ -21,6 +21,9 @@ install:
   # Install required dependencies.
   - ansible-galaxy install geerlingguy.apache
 
+  # Testing.
+  - whoami
+
 script:
   # Check the role/playbook's syntax.
   - "ansible-playbook -i tests/inventory tests/$SITE --syntax-check"
@@ -34,6 +37,10 @@ script:
     | grep -q 'changed=0.*failed=0'
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
+
+  # Testing.
+  - ls -lah /etc/apache2/mods-available
+  - ls -lah /etc/apache2/mods-enabled
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
