@@ -17,7 +17,7 @@
     src: "{{ adminer_install_dir }}/adminer.php"
     dest: "{{ item }}/adminer.php"
     state: link
-  with_items: adminer_symlink_dirs
+  with_items: "{{ adminer_symlink_dirs }}"
 
 # Add Apache configuration (if configured).
 - name: Set the proper Apache configuration directory (Debian).
