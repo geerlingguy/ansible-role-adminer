@@ -7,31 +7,41 @@ env:
     init: /sbin/init
     run_opts: ""
     test_file: test-apache.yml
+    DOCKER_VERSION: "1.9.1-0~trusty"
   - repository: geerlingguy/docker-centos7-ansible
     version: latest
     init: /usr/lib/systemd/systemd
     run_opts: "--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro"
     test_file: test-apache.yml
+    DOCKER_VERSION: "1.9.1-0~trusty"
   - repository: geerlingguy/docker-ubuntu1404-ansible
     version: latest
     init: /sbin/init
     run_opts: ""
     test_file: test-apache.yml
+    DOCKER_VERSION: "1.9.1-0~trusty"
   - repository: geerlingguy/docker-ubuntu1204-ansible
     version: latest
     init: /sbin/init
     run_opts: ""
     test_file: test-apache.yml
+    DOCKER_VERSION: "1.9.1-0~trusty"
   - repository: geerlingguy/docker-ubuntu1404-ansible
     version: latest
     init: /sbin/init
     run_opts: ""
     test_file: test-standalone.yml
+    DOCKER_VERSION: "1.9.1-0~trusty"
 
 services:
   - docker
 
 before_install:
+  # Downgrade to older version of Docker engine.
+  - sudo apt-get update
+  - sudo apt-get remove docker-engine -yq
+  - sudo apt-get install docker-engine=$DOCKER_VERSION -yq --no-install-suggests --no-install-recommends --force-yes -o Dpkg::Options::="--force-confnew"
+
   # Pull container
   - 'sudo docker pull ${repository}:${version}'
 
