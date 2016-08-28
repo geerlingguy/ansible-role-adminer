@@ -2,46 +2,53 @@
 sudo: required
 
 env:
-  - distribution: centos
-    version: 6
+  - repository: geerlingguy/docker-centos6-ansible
+    version: latest
     init: /sbin/init
     run_opts: ""
     test_file: test-apache.yml
-  - distribution: centos
-    version: 7
+    DOCKER_VERSION: "1.9.1-0~trusty"
+  - repository: geerlingguy/docker-centos7-ansible
+    version: latest
     init: /usr/lib/systemd/systemd
     run_opts: "--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro"
     test_file: test-apache.yml
-  - distribution: ubuntu
-    version: 14.04
+    DOCKER_VERSION: "1.9.1-0~trusty"
+  - repository: geerlingguy/docker-ubuntu1404-ansible
+    version: latest
     init: /sbin/init
     run_opts: ""
     test_file: test-apache.yml
-  - distribution: ubuntu
-    version: 12.04
+    DOCKER_VERSION: "1.9.1-0~trusty"
+  - repository: geerlingguy/docker-ubuntu1204-ansible
+    version: latest
     init: /sbin/init
     run_opts: ""
     test_file: test-apache.yml
-  - distribution: ubuntu
-    version: 14.04
+    DOCKER_VERSION: "1.9.1-0~trusty"
+  - repository: geerlingguy/docker-ubuntu1404-ansible
+    version: latest
     init: /sbin/init
     run_opts: ""
     test_file: test-standalone.yml
+    DOCKER_VERSION: "1.9.1-0~trusty"
 
 services:
   - docker
 
 before_install:
-  # - sudo apt-get update
+  # Downgrade to older version of Docker engine.
+  - sudo apt-get update
+  - sudo apt-get remove docker-engine -yq
+  - sudo apt-get install docker-engine=$DOCKER_VERSION -yq --no-install-suggests --no-install-recommends --force-yes -o Dpkg::Options::="--force-confnew"
+
   # Pull container
-  - 'sudo docker pull ${distribution}:${version}'
-  # Customize container
-  - 'sudo docker build --rm=true --file=tests/Dockerfile.${distribution}-${version} --tag=${distribution}-${version}:ansible tests'
+  - 'sudo docker pull ${repository}:${version}'
 
 script:
   - container_id=$(mktemp)
   # Run container in detached state
-  - 'sudo docker run --detach --volume="${PWD}":/etc/ansible/roles/role_under_test:ro ${run_opts} ${distribution}-${version}:ansible "${init}" > "${container_id}"'
+  - 'sudo docker run --detach --volume="${PWD}":/etc/ansible/roles/role_under_test:ro ${run_opts} ${repository}:${version} "${init}" > "${container_id}"'
 
   # Install required Galaxy roles.
   - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm ansible-galaxy install geerlingguy.apache'
