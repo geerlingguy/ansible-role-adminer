@@ -14,8 +14,8 @@
 
 - name: Symlink Adminer into configured directories.
   file:
-    src: "{{ adminer_install_dir }}/adminer.php"
-    dest: "{{ item }}/adminer.php"
+    src: "{{ adminer_install_dir }}/{{ adminer_install_filename }}"
+    dest: "{{ item }}/{{ adminer_install_filename }}"
     state: link
   with_items: "{{ adminer_symlink_dirs }}"
 
