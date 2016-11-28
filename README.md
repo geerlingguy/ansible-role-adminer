@@ -29,10 +29,22 @@ Directories inside which you would like `adminer.php` symlinked. Can be useful i
 Set this to `true` to tell Adminer to add a config file to Apache so you can access it at `hostname/adminer` on any configured virtualhost, using an Apache `Alias` directive. The role will also restart Apache so this configuration takes effect immediately.
 
 ```yml
-  adminer_theme: ''
+adminer_theme: ''
 ```
 
 You can use any theme from adminer library (for example `pappu687`). You can find the full list [here](https://www.adminer.org/en/#extras).
+
+```yml
+adminer_sgbd: ''
+```
+
+If you just use `mysql` and don't want to have a full list of SGBD, you can set this option to `-mysql` (do not forget the `-` before)
+
+```yml
+adminer_lang: ''
+```
+
+If you don't want to have full list of Adminer locales, you cant set the one you want: `-en` (do not forget the `-` before)
 
 ## Dependencies
 

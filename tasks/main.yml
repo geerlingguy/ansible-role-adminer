@@ -8,7 +8,7 @@
 
 - name: Download Adminer to configured directory.
   get_url:
-    url: http://www.adminer.org/latest.php
+    url: http://www.adminer.org/latest{{ adminer_sgbd }}{{ adminer_lang }}.php
     dest: "{{ adminer_install_dir }}/{{ adminer_install_filename }}"
     mode: 0644
 
