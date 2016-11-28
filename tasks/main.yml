@@ -19,6 +19,22 @@
     state: link
   with_items: "{{ adminer_symlink_dirs }}"
 
+# Install Adminer theme.
+- name: Download Adminer theme
+  get_url:
+    url: https://raw.githubusercontent.com/vrana/adminer/master/designs/{{ adminer_theme }}/adminer.css
+    dest: "{{ adminer_install_dir }}"
+    mode: 0644
+  when: adminer_theme is defined and adminer_theme != null
+
+- name: Symlink Adminer theme into configured directories.
+  file:
+    src: "{{ adminer_install_dir }}/adminer.css"
+    dest: "{{ item }}/adminer.css"
+    state: link
+  with_items: "{{ adminer_symlink_dirs }}"
+  when: adminer_theme is defined and adminer_theme != null
+
 # Add Apache configuration (if configured).
 - name: Set the proper Apache configuration directory (Debian).
   set_fact:

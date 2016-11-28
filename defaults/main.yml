@@ -3,3 +3,4 @@ adminer_install_dir: /opt/adminer
 adminer_install_filename: adminer.php
 adminer_symlink_dirs: []
 adminer_add_apache_config: false
+adminer_theme: ''

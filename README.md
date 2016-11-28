@@ -12,7 +12,7 @@ You need to have PHP and MySQL for Adminer to do anything useful. If you have Ap
 
 Available variables are listed below, along with default values (see `defaults/main.yml`):
 
-    adminer_install_dir: /opt/adminer
+  adminer_install_dir: /opt/adminer
 
 The directory in which Adminer will be downloaded/installed.
 
@@ -27,6 +27,12 @@ Directories inside which you would like `adminer.php` symlinked. Can be useful i
     adminer_add_apache_config: false
 
 Set this to `true` to tell Adminer to add a config file to Apache so you can access it at `hostname/adminer` on any configured virtualhost, using an Apache `Alias` directive. The role will also restart Apache so this configuration takes effect immediately.
+
+```yml
+  adminer_theme: ''
+```
+
+You can use any theme from adminer library (for example `pappu687`). You can find the full list [here](https://www.adminer.org/en/#extras).
 
 ## Dependencies
 
