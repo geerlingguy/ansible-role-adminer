@@ -1,55 +1,27 @@
 ---
-sudo: required
 services: docker
 
 env:
-  - distro: centos6
-    init: /sbin/init
-    run_opts: ""
-    test_file: test-apache.yml
   - distro: centos7
-    init: /usr/lib/systemd/systemd
-    run_opts: "--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro"
-    test_file: test-apache.yml
+    playbook: test-apache.yml
+  - distro: centos6
+    playbook: test-apache.yml
+  - distro: ubuntu1604
+    playbook: test-apache.yml
   - distro: ubuntu1404
-    init: /sbin/init
-    run_opts: ""
-    test_file: test-apache.yml
-  - distro: ubuntu1204
-    init: /sbin/init
-    run_opts: ""
-    test_file: test-apache.yml
-  - distro: ubuntu1404
-    init: /sbin/init
-    run_opts: ""
-    test_file: test-standalone.yml
-
-before_install:
-  # Pull container.
-  - 'docker pull geerlingguy/docker-${distro}-ansible:latest'
+    playbook: test-apache.yml
+  - distro: debian8
+    playbook: test-apache.yml
+  - distro: ubuntu1604
+    playbook: test-standalone.yml
 
 script:
-  - container_id=$(mktemp)
-  # Run container in detached state.
-  - 'docker run --detach --volume="${PWD}":/etc/ansible/roles/role_under_test:ro ${run_opts} geerlingguy/docker-${distro}-ansible:latest "${init}" > "${container_id}"'
+  # Download test shim.
+  - wget -O ${PWD}/tests/test.sh https://gist.githubusercontent.com/geerlingguy/73ef1e5ee45d8694570f334be385e181/raw/51ef4c5aea346b3f8dd2c2518233a70dac6407d9/ansible-role-test.sh
+  - chmod +x ${PWD}/tests/test.sh
 
-  # Install dependencies.
-  - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm ansible-galaxy install geerlingguy.apache'
-
-  # Ansible syntax check.
-  - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm ansible-playbook /etc/ansible/roles/role_under_test/tests/${test_file} --syntax-check'
-
-  # Test role.
-  - 'docker exec "$(cat ${container_id})" ansible-playbook /etc/ansible/roles/role_under_test/tests/${test_file}'
-
-  # Test role idempotence.
-  - idempotence=$(mktemp)
-  - docker exec "$(cat ${container_id})" ansible-playbook /etc/ansible/roles/role_under_test/tests/${test_file} | tee -a ${idempotence}
-  - >
-    tail ${idempotence}
-    | grep -q 'changed=0.*failed=0'
-    && (echo 'Idempotence test: pass' && exit 0)
-    || (echo 'Idempotence test: fail' && exit 1)
+  # Run tests.
+  - ${PWD}/tests/test.sh ${distro} ${playbook}
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
