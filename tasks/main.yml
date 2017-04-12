@@ -14,10 +14,9 @@
     timeout: 60
 
 - name: Ensure paths to place symlinks exist
-  #file: 
-  # state: directory
-  # path: "{{ item | realpath }}"
-  debug: msg="Path {{ item | realpath }} or {{ item | realpath | basename }}"
+  file: 
+    state: directory
+    path: "{{ item }}"
   with_items:
     - "{{ adminer_symlink_dirs }}"
 
