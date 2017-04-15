@@ -40,6 +40,7 @@
   get_url:
     url: https://raw.githubusercontent.com/vrana/adminer/master/designs/{{ adminer_theme }}/adminer.css
     dest: "{{ adminer_install_dir }}"
+    force: "{{ (adminer_is_old.matched == 1) | ternary('yes','no') }}"
     mode: 0644
     timeout: 60
   when: adminer_theme is defined and adminer_theme != null
