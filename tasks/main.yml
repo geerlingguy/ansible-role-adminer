@@ -6,10 +6,18 @@
     state: directory
     recurse: yes
 
+- name: Testing if adminer is older then 1 day
+  find:
+    paths: "{{ adminer_install_dir }}"
+    patterns: "{{ adminer_install_filename }}"
+    #age: "1d"
+  register: adminer_is_old
+
 - name: Download Adminer to configured directory.
   get_url:
     url: http://www.adminer.org/latest.php
     dest: "{{ adminer_install_dir }}/{{ adminer_install_filename }}"
+    force: "{{ (adminer_is_old.matched == 1) | ternary('yes','no') }}"
     mode: 0644
     timeout: 60
 
