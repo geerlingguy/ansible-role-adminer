@@ -10,7 +10,7 @@
   find:
     paths: "{{ adminer_install_dir }}"
     patterns: "{{ adminer_install_filename }}"
-    #age: "1d"
+    age: "1d"
   register: adminer_is_old
 
 - name: Download Adminer to configured directory.
