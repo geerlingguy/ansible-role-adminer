@@ -12,6 +12,7 @@
     dest: "{{ adminer_install_dir }}/{{ adminer_install_filename }}"
     mode: 0644
     timeout: 60
+    force: yes
 
 - name: Symlink Adminer into configured directories.
   file:
