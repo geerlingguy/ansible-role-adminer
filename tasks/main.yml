@@ -35,7 +35,7 @@
     src: "{{ adminer_install_dir }}/adminer.php"
     dest: "{{ item }}/adminer.php"
     state: link
-    # mode: TODO
+    mode: 0644
   with_items: "{{ adminer_symlink_dirs }}"
 
 # Install Adminer theme.
@@ -53,7 +53,7 @@
     src: "{{ adminer_install_dir }}/adminer.css"
     dest: "{{ item }}/adminer.css"
     state: link
-    # mode: TODO
+    mode: 0644
   with_items: "{{ adminer_symlink_dirs }}"
   when: adminer_theme is defined and adminer_theme != null
 
