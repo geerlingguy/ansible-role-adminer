@@ -5,6 +5,7 @@
     path: "{{ adminer_install_dir }}"
     state: directory
     recurse: true
+    mode: 0755
 
 - name: Testing if adminer is older then 1 day
   find:
@@ -25,6 +26,7 @@
   file:
     state: directory
     path: "{{ item }}"
+    mode: 0755
   with_items:
     - "{{ adminer_symlink_dirs }}"
 
@@ -33,6 +35,7 @@
     src: "{{ adminer_install_dir }}/adminer.php"
     dest: "{{ item }}/adminer.php"
     state: link
+    # mode: TODO
   with_items: "{{ adminer_symlink_dirs }}"
 
 # Install Adminer theme.
@@ -50,6 +53,7 @@
     src: "{{ adminer_install_dir }}/adminer.css"
     dest: "{{ item }}/adminer.css"
     state: link
+    # mode: TODO
   with_items: "{{ adminer_symlink_dirs }}"
   when: adminer_theme is defined and adminer_theme != null
 
@@ -64,6 +68,7 @@
   template:
     src: adminer.conf.j2
     dest: "{{ apache_conf_path }}/{{ apache_extra_conf_dir }}/adminer.conf"
+    mode: 0644
   when: adminer_add_apache_config and ansible_os_family == 'Debian'
   notify: restart apache
 
@@ -71,5 +76,6 @@
   template:
     src: adminer.conf.j2
     dest: "{{ apache_conf_path }}/adminer.conf"
+    mode: 0644
   when: adminer_add_apache_config and ansible_os_family == 'RedHat'
   notify: restart apache
