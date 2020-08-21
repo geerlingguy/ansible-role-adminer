@@ -1,7 +1,7 @@
 ---
 # Install Adminer.
 - name: Ensure Adminer directory exists.
-  file:  # noqa 106
+  file:  # noqa 208
     path: "{{ adminer_install_dir }}"
     state: directory
     recurse: true
