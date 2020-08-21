@@ -1,11 +1,10 @@
 ---
 # Install Adminer.
 - name: Ensure Adminer directory exists.
-  file:
+  file:  # noqa 106
     path: "{{ adminer_install_dir }}"
     state: directory
     recurse: true
-    mode: 0755
 
 - name: Testing if adminer is older then 1 day
   find:
