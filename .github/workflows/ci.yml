@@ -41,13 +41,15 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        distro:
-          - centos7
-          - ubuntu2004
-          - debian10
-        playbook:
-          - playbook.yml
-          - playbook-standalone.yml
+        include:
+          - distro: centos7
+            playbook: converge.yml
+          - distro: ubuntu2004
+            playbook: converge.yml
+          - distro: debian10
+            playbook: converge.yml
+          - distro: centos7
+            playbook: standalone.yml
 
     steps:
       - name: Check out the codebase.
