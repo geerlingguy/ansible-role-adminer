@@ -1,6 +1,6 @@
 # Ansible Role: Adminer
 
-[![Build Status](https://travis-ci.com/geerlingguy/ansible-role-adminer.svg?branch=master)](https://travis-ci.com/geerlingguy/ansible-role-adminer)
+[![CI](https://github.com/geerlingguy/ansible-role-adminer/workflows/CI/badge.svg?event=push)](https://github.com/geerlingguy/ansible-role-adminer/actions?query=workflow%3ACI)
 
 An Ansible Role that installs [Adminer](http://www.adminer.org/) on almost any computer.
 
