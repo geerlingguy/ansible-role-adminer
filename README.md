@@ -12,6 +12,10 @@ You need to have PHP and MySQL for Adminer to do anything useful. If you have Ap
 
 Available variables are listed below, along with default values (see `defaults/main.yml`):
 
+    adminer_download_url: https://www.adminer.org/latest.php
+
+The URL from which Adminer should be downloaded.
+
     adminer_install_dir: /opt/adminer
 
 The directory in which Adminer will be downloaded/installed.
